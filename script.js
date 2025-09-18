@@ -115,42 +115,65 @@
   }
   applyTranslations(savedLocale);
 
-  const slider = document.querySelector('.slider');
-  if (!slider) return;
-  const slidesContainer = slider.querySelector('.slides');
-  const prevBtn = slider.querySelector('.prev');
-  const nextBtn = slider.querySelector('.next');
-  const slides = Array.from(slider.querySelectorAll('.slide'));
+  // Support multiple sliders (featured + gallery)
+  document.querySelectorAll('.slider').forEach((slider) => {
+    const slidesContainer = slider.querySelector('.slides');
+    const prevBtn = slider.querySelector('.prev');
+    const nextBtn = slider.querySelector('.next');
+    const slides = Array.from(slider.querySelectorAll('.slide'));
 
-  let index = 0;
+    let index = 0;
 
-  function update() {
-    slidesContainer.style.transform = `translateX(-${index * 100}%)`;
-  }
+    function update() {
+      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+    }
 
-  function prev() {
-    index = (index - 1 + slides.length) % slides.length;
-    update();
-  }
+    function prev() {
+      index = (index - 1 + slides.length) % slides.length;
+      update();
+    }
 
-  function next() {
-    index = (index + 1) % slides.length;
-    update();
-  }
+    function next() {
+      index = (index + 1) % slides.length;
+      update();
+    }
 
-  prevBtn?.addEventListener('click', prev);
-  nextBtn?.addEventListener('click', next);
+    prevBtn?.addEventListener('click', prev);
+    nextBtn?.addEventListener('click', next);
 
-  // Keyboard accessibility
-  slider.addEventListener('keyup', (e) => {
-    if (e.key === 'ArrowLeft') prev();
-    if (e.key === 'ArrowRight') next();
+    // Keyboard accessibility
+    slider.tabIndex = 0;
+    slider.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // Drag/swipe support
+    let startX = 0;
+    let isDown = false;
+    const onDown = (x) => { isDown = true; startX = x; };
+    const onMove = (x) => {
+      if (!isDown) return;
+      const delta = x - startX;
+      if (Math.abs(delta) > 40) {
+        if (delta > 0) prev(); else next();
+        isDown = false;
+      }
+    };
+    const onUp = () => { isDown = false; };
+    slider.addEventListener('mousedown', (e) => onDown(e.clientX));
+    slider.addEventListener('mousemove', (e) => onMove(e.clientX));
+    slider.addEventListener('mouseup', onUp);
+    slider.addEventListener('mouseleave', onUp);
+    slider.addEventListener('touchstart', (e) => onDown(e.touches[0].clientX), { passive: true });
+    slider.addEventListener('touchmove', (e) => onMove(e.touches[0].clientX), { passive: true });
+    slider.addEventListener('touchend', onUp);
+
+    // Auto-play (gentle)
+    let timer = setInterval(next, 5000);
+    slider.addEventListener('mouseenter', () => clearInterval(timer));
+    slider.addEventListener('mouseleave', () => { timer = setInterval(next, 5000); });
   });
-
-  // Auto-play (gentle)
-  let timer = setInterval(next, 5000);
-  slider.addEventListener('mouseenter', () => clearInterval(timer));
-  slider.addEventListener('mouseleave', () => { timer = setInterval(next, 5000); });
 })();
 
 

@@ -140,6 +140,9 @@ h2 { font-size: 20px; margin: 0 0 14px; }
 .slider.featured .slide:last-child img { object-position: right center; }
 .about-with-featured { align-items: center; }
 
+/* Gallery same size as featured */
+.slider.gallery { height: min(800px, 100%); }
+
 .slider-btn {
   position: absolute; top: 50%; transform: translateY(-50%);
   background: rgba(20,20,26,0.7);
