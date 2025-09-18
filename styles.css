@@ -140,10 +140,10 @@ h2 { font-size: 20px; margin: 0 0 14px; }
 .slider.featured .slide:last-child img { object-position: right center; }
 .about-with-featured { align-items: center; }
 
-/* Gallery slider - optimized width for mixed orientations */
+/* Gallery slider - match Mvector width */
 .slider.gallery { 
   height: min(600px, 100%); 
-  width: min(400px, 100%);
+  width: min(2040px, 100%);
   margin: 0 auto;
 }
 
