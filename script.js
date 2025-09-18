@@ -36,9 +36,9 @@
       'experience.item2.sub': '2022–დღემდე',
       'experience.item2.desc': 'მოსწავლეების მხარდაჭერა მასალის გაღრმავებაში და ამოცანებზე მუშაობა.',
       'achievements.title': 'სხვა',
-      'achievements.item1': 'ტურნირის მიღწევა 1',
-      'achievements.item2': 'ტურნირის მიღწევა 2',
-      'achievements.item3': 'ტურნირის მიღწევა 3',
+      'achievements.item1': 'კინგსის 3xგამარჯვებული და ნაკრების წევრი.',
+      'achievements.item2': 'ოლიმპიადა "იმედი ხვალისა" 2xფინალისტი',
+      'achievements.item3': 'Mvectorის ფინალისტი.',
       'gallery.title': 'გალერეა',
       'contact.title': 'კონტაქტი',
       'contact.email_label': 'ელფოსტა:'
