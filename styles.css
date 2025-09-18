@@ -143,7 +143,7 @@ h2 { font-size: 20px; margin: 0 0 14px; }
 /* Gallery same size as featured */
 .slider.gallery { 
   height: min(800px, 100%); 
-  width: min(600px, 100%);
+  width: min(2040px, 100%);
   margin: 0 auto;
 }
 
