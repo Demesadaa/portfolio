@@ -140,31 +140,17 @@ h2 { font-size: 20px; margin: 0 0 14px; }
 .slider.featured .slide:last-child img { object-position: right center; }
 .about-with-featured { align-items: center; }
 
-/* Gallery same size as featured */
+/* Gallery slider - optimized width for mixed orientations */
 .slider.gallery { 
-  height: min(800px, 100%); 
-  width: min(2040px, 100%);
+  height: min(600px, 100%); 
+  width: min(400px, 100%);
   margin: 0 auto;
 }
 
-/* Handle portrait certificates in landscape slider */
+/* Handle all certificates in gallery */
 .slider.gallery .slide img {
   object-fit: contain;
   background: #0f0f11;
-}
-
-/* Zoom on Kings certificate text area - focus on the white certificate area */
-.slider.gallery .slide:first-child img {
-  object-fit: cover;
-  object-position: center 20%;
-  transform: scale(1.3);
-}
-
-/* Crop Komar certificate slightly */
-.slider.gallery .slide:last-child img {
-  object-fit: cover;
-  object-position: center center;
-  transform: scale(1.05);
 }
 
 .slider-btn {
