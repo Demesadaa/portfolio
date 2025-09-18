@@ -39,6 +39,42 @@
       'gallery.title': 'გალერეა',
       'contact.title': 'კონტაქტი',
       'contact.email_label': 'ელფოსტა:'
+    },
+    en: {
+      'nav.about': 'About',
+      'nav.education': 'Education',
+      'nav.experience': 'Experience',
+      'nav.other': 'Other',
+      'nav.gallery': 'Gallery',
+      'nav.contact': 'Contact',
+      'hero.subtitle': 'Math tutor — clear explanations, structured practice, measurable progress.',
+      'actions.call': 'Call',
+      'actions.whatsapp': 'WhatsApp',
+      'actions.instagram': 'Instagram',
+      'actions.facebook': 'Facebook',
+      'about.title': 'About',
+      'about.list.1': '1:1 and small group lessons',
+      'about.list.2': 'Concept-first explanations',
+      'about.list.3': 'Weekly progress tracking',
+      'education.title': 'Education',
+      'education.item1.title': 'Bachelor — Mathematics',
+      'education.item1.desc': 'Core topics: Algebra, Analysis, Combinatorics, Probability.',
+      'education.item2.title': 'Extra courses / Certificates',
+      'education.item2.desc': 'Add any relevant courses or trainings.',
+      'experience.title': 'Experience',
+      'experience.item1.title': 'Math Tutor',
+      'experience.item1.sub': 'Freelance · 2020–present',
+      'experience.item1.desc': '1:1 and group teaching; exam prep; olympiad mentoring.',
+      'experience.item2.title': 'Teaching Assistant',
+      'experience.item2.sub': 'Institute · YYYY–YYYY',
+      'experience.item2.desc': 'Course support, grading, running seminars.',
+      'achievements.title': 'Other',
+      'achievements.item1': 'Competition achievement 1',
+      'achievements.item2': 'Competition achievement 2',
+      'achievements.item3': 'Competition achievement 3',
+      'gallery.title': 'Gallery',
+      'contact.title': 'Contact',
+      'contact.email_label': 'Email:'
     }
   };
 
@@ -55,7 +91,18 @@
     document.documentElement.lang = locale;
   }
 
-  applyTranslations('ka');
+  // initialize locale from localStorage or default
+  const savedLocale = localStorage.getItem('locale') || 'ka';
+  const langSelect = document.getElementById('lang');
+  if (langSelect) {
+    langSelect.value = savedLocale;
+    langSelect.addEventListener('change', () => {
+      const next = langSelect.value;
+      localStorage.setItem('locale', next);
+      applyTranslations(next);
+    });
+  }
+  applyTranslations(savedLocale);
 
   const slider = document.querySelector('.slider');
   if (!slider) return;
