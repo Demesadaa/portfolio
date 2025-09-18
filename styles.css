@@ -143,7 +143,7 @@ h2 { font-size: 20px; margin: 0 0 14px; }
 /* Gallery same size as featured */
 .slider.gallery { 
   height: min(800px, 100%); 
-  width: min(500px, 100%);
+  width: min(600px, 100%);
   margin: 0 auto;
 }
 
@@ -153,11 +153,11 @@ h2 { font-size: 20px; margin: 0 0 14px; }
   background: #0f0f11;
 }
 
-/* Zoom on Kings certificate text area */
+/* Zoom on Kings certificate text area - focus on the white certificate area */
 .slider.gallery .slide:first-child img {
   object-fit: cover;
-  object-position: center 30%;
-  transform: scale(1.1);
+  object-position: center 20%;
+  transform: scale(1.3);
 }
 
 /* Crop Komar certificate slightly */
