@@ -127,6 +127,38 @@
   }
   applyTranslations(savedLocale);
 
+  // If user has not chosen a locale yet, detect country and default to EN outside Georgia
+  (async function detectLocaleByCountry() {
+    if (localStorage.getItem('locale')) return; // respect prior choice
+
+    async function fetchCountryCode() {
+      try {
+        // Fast, no-key API
+        const res = await fetch('https://ipwho.is/?fields=country_code');
+        const data = await res.json();
+        if (data && typeof data.country_code === 'string' && data.country_code.length === 2) {
+          return data.country_code.toUpperCase();
+        }
+      } catch (_) {}
+      try {
+        // Fallback provider
+        const res = await fetch('https://ipapi.co/country/');
+        const text = await res.text();
+        if (text && text.trim().length === 2) return text.trim().toUpperCase();
+      } catch (_) {}
+      return null;
+    }
+
+    const code = await fetchCountryCode();
+    if (code && code !== 'GE') {
+      applyTranslations('en');
+      if (langSelect) langSelect.value = 'en';
+    } else {
+      // Keep Georgian as default in Georgia or when undetermined
+      if (langSelect) langSelect.value = 'ka';
+    }
+  })();
+
   // Support multiple sliders (featured + gallery)
   document.querySelectorAll('.slider').forEach((slider) => {
     const slidesContainer = slider.querySelector('.slides');
